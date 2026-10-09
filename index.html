@@ -1,0 +1,1380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoVibe - Sustainable Living & Eco-Friendly Store</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,800;1,600&display=swap" rel="stylesheet">
+    <!-- Canvas Confetti for Celebration Effects -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        eco: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            200: '#bbf7d0',
+                            300: '#86efac',
+                            400: '#4ade80',
+                            500: '#22c55e',
+                            600: '#16a34a',
+                            700: '#15803d',
+                            800: '#166534',
+                            900: '#14532d',
+                            dark: '#0e3a1e'
+                        },
+                        bamboo: {
+                            100: '#fef3c7',
+                            200: '#fde68a',
+                            500: '#d97706',
+                            700: '#b45309',
+                            800: '#78350f'
+                        },
+                        festive: {
+                            gold: '#f59e0b',
+                            crimson: '#dc2626',
+                            marigold: '#fbbf24',
+                            pink: '#ec4899',
+                            purple: '#8b5cf6'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        serif: ['"Playfair Display"', 'serif']
+                    },
+                    animation: {
+                        'float': 'float 4s ease-in-out infinite',
+                        'float-slow': 'float 7s ease-in-out infinite',
+                        'pulse-glow': 'pulseGlow 2s infinite',
+                        'shimmer': 'shimmer 2s infinite linear',
+                        'spin-slow': 'spin 12s linear infinite',
+                        'bounce-subtle': 'bounceSubtle 2s infinite'
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
+                            '50%': { transform: 'translateY(-12px) rotate(2deg)' }
+                        },
+                        pulseGlow: {
+                            '0%, 100%': { opacity: '1', boxShadow: '0 0 15px rgba(34, 197, 94, 0.4)' },
+                            '50%': { opacity: '0.8', boxShadow: '0 0 30px rgba(34, 197, 94, 0.7)' }
+                        },
+                        shimmer: {
+                            '0%': { backgroundPosition: '-200% 0' },
+                            '100%': { backgroundPosition: '200% 0' }
+                        },
+                        bounceSubtle: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-6px)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #fbfdfb;
+            color: #1f2937;
+            overflow-x: hidden;
+        }
+        
+        .festive-gradient {
+            background: linear-gradient(135deg, #fff7ed 0%, #fef3c7 35%, #ecfdf5 100%);
+        }
+
+        .navratri-banner-bg {
+            background: linear-gradient(90deg, #7c2d12 0%, #9a3412 25%, #c2410c 50%, #b45309 75%, #15803d 100%);
+            background-size: 200% 200%;
+            animation: gradientMove 8s ease infinite;
+        }
+
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(220, 252, 231, 0.6);
+        }
+
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(16px);
+        }
+
+        /* Custom scrollbars */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #86efac;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #22c55e;
+        }
+
+        .tab-active {
+            color: #15803d !important;
+            border-bottom: 2px solid #16a34a;
+            font-weight: 700;
+        }
+
+        .festive-border {
+            border: 2px dashed #f59e0b;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-eco-200 selection:text-eco-900">
+
+    <div id="navratri-top-bar" class="navratri-banner-bg text-white py-2 px-4 relative overflow-hidden transition-all duration-300 z-50">
+        <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between text-xs sm:text-sm font-medium">
+            <div class="flex items-center space-x-2 my-1">
+                <span class="inline-flex items-center justify-center bg-amber-400 text-amber-950 px-2 py-0.5 rounded-full font-bold text-xs animate-pulse">
+                    <i class="fa-solid fa-om mr-1"></i> NAVRATRI SPECIAL
+                </span>
+                <span>Celebrate Clean & Green! Get <strong class="text-amber-300 font-extrabold underline decoration-amber-300">20% OFF</strong> on all Eco-Friendly Festive Kits!</span>
+            </div>
+            <div class="flex items-center space-x-4 my-1">
+                <div class="hidden md:flex items-center space-x-1 text-amber-200 text-xs">
+                    <i class="fa-solid fa-clock"></i>
+                    <span>Offer ends in: <span id="navratri-timer" class="font-mono font-bold text-white">04d : 18h : 32m : 10s</span></span>
+                </div>
+                <button onclick="copyCouponCode('NAVRATRI20')" class="bg-amber-400 hover:bg-amber-300 text-amber-950 font-bold px-3 py-1 rounded-full text-xs transition duration-200 shadow hover:scale-105 active:scale-95 flex items-center space-x-1">
+                    <i class="fa-regular fa-copy"></i>
+                    <span>Use Code: <strong class="font-black">NAVRATRI20</strong></span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <header class="sticky top-0 z-40 glass-nav shadow-sm transition-all duration-300 border-b border-eco-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                
+                <!-- Theme Matched Logo -->
+                <div class="flex items-center space-x-3 cursor-pointer" onclick="navigateTo('home')">
+                    <div class="relative flex items-center justify-center w-12 h-12 rounded-2xl bg-gradient-to-tr from-eco-600 to-eco-400 text-white shadow-lg shadow-eco-200 transform hover:rotate-6 transition duration-300">
+                        <!-- Custom Bamboo + Leaf Hybrid SVG Logo -->
+                        <svg class="w-7 h-7 fill-current" viewBox="0 0 24 24">
+                            <!-- Bamboo Segment 1 -->
+                            <rect x="7" y="10" width="4" height="11" rx="1" fill="#ffffff" opacity="0.9"/>
+                            <line x1="6.5" y1="14" x2="11.5" y2="14" stroke="#15803d" stroke-width="1.5" stroke-linecap="round"/>
+                            <!-- Bamboo Segment 2 -->
+                            <rect x="13" y="6" width="4" height="15" rx="1" fill="#ffffff"/>
+                            <line x1="12.5" y1="11" x2="17.5" y2="11" stroke="#15803d" stroke-width="1.5" stroke-linecap="round"/>
+                            <line x1="12.5" y1="16" x2="17.5" y2="16" stroke="#15803d" stroke-width="1.5" stroke-linecap="round"/>
+                            <!-- Sprouting Leaves -->
+                            <path d="M15 6C15 2.5 19 2 21 2C21 5.5 17 6 15 6Z" fill="#fef3c7"/>
+                            <path d="M9 10C9 7 6 6.5 4 6.5C4 9.5 7 10 9 10Z" fill="#bbf7d0"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <div class="flex items-center space-x-1">
+                            <span class="font-black text-2xl tracking-tight text-eco-900 font-serif">Eco<span class="text-eco-600">Vibe</span></span>
+                            <span class="text-xs bg-amber-100 text-amber-800 font-bold px-1.5 py-0.5 rounded border border-amber-200">9 Navratri</span>
+                        </div>
+                        <p class="text-[10px] uppercase tracking-widest text-eco-700 font-semibold">100% Sustainable Living</p>
+                    </div>
+                </div>
+
+                <!-- Desktop Navigation Links (Multipage SPA Router) -->
+                <nav class="hidden md:flex items-center space-x-1 lg:space-x-2 text-sm font-semibold text-gray-700">
+                    <button onclick="navigateTo('home')" id="nav-home" class="nav-btn px-3 py-2 rounded-xl hover:text-eco-600 hover:bg-eco-50 transition duration-150 tab-active">
+                        <i class="fa-solid fa-house mr-1.5 text-xs"></i> Home
+                    </button>
+                    <button onclick="navigateTo('shop')" id="nav-shop" class="nav-btn px-3 py-2 rounded-xl hover:text-eco-600 hover:bg-eco-50 transition duration-150">
+                        <i class="fa-solid fa-leaf mr-1.5 text-xs"></i> Eco Shop
+                    </button>
+                    <button onclick="navigateTo('navratri')" id="nav-navratri" class="nav-btn px-3 py-2 rounded-xl text-amber-700 hover:bg-amber-50 transition duration-150 relative">
+                        <i class="fa-solid fa-sparkles mr-1.5 text-amber-500 text-xs animate-bounce"></i> Navratri Special
+                        <span class="absolute -top-1 -right-1 bg-amber-500 text-white text-[9px] font-extrabold px-1.5 py-0.2 rounded-full animate-pulse">HOT</span>
+                    </button>
+                    <button onclick="navigateTo('calculator')" id="nav-calculator" class="nav-btn px-3 py-2 rounded-xl hover:text-eco-600 hover:bg-eco-50 transition duration-150">
+                        <i class="fa-solid fa-calculator mr-1.5 text-xs"></i> Impact Calculator
+                    </button>
+                    <button onclick="navigateTo('about')" id="nav-about" class="nav-btn px-3 py-2 rounded-xl hover:text-eco-600 hover:bg-eco-50 transition duration-150">
+                        <i class="fa-solid fa-seedling mr-1.5 text-xs"></i> Our Mission
+                    </button>
+                </nav>
+
+                <!-- Header Actions & Cart Trigger -->
+                <div class="flex items-center space-x-3">
+                    <!-- Quick Eco Search -->
+                    <div class="relative hidden sm:block">
+                        <input type="text" id="shop-search" onkeyup="filterProductsBySearch(this.value)" placeholder="Search bamboo bottles..." class="w-40 lg:w-52 bg-eco-50/80 border border-eco-200 text-xs rounded-full py-2 pl-8 pr-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-eco-500 focus:bg-white transition duration-200">
+                        <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-xs text-eco-600"></i>
+                    </div>
+
+                    <!-- Cart Drawer Trigger Button -->
+                    <button onclick="toggleCartModal(true)" class="relative p-2.5 bg-eco-600 hover:bg-eco-700 text-white rounded-2xl shadow-md shadow-eco-200 transition duration-200 transform hover:scale-105 active:scale-95 flex items-center space-x-2">
+                        <i class="fa-solid fa-bag-shopping text-base"></i>
+                        <span class="hidden sm:inline-block text-xs font-bold">Cart</span>
+                        <span id="cart-badge" class="bg-amber-400 text-amber-950 font-extrabold text-[11px] w-5 h-5 rounded-full flex items-center justify-center border-2 border-white">0</span>
+                    </button>
+
+                    <!-- Mobile Menu Button -->
+                    <button onclick="toggleMobileMenu()" class="md:hidden p-2 text-gray-600 hover:text-eco-700 focus:outline-none">
+                        <i class="fa-solid fa-bars-staggered text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Drawer Navigation -->
+        <div id="mobile-menu" class="hidden md:hidden border-t border-eco-100 bg-white/95 px-4 pt-2 pb-4 space-y-2">
+            <button onclick="navigateTo('home'); toggleMobileMenu()" class="block w-full text-left px-3 py-2 rounded-lg text-sm font-semibold text-gray-700 hover:bg-eco-50">Home</button>
+            <button onclick="navigateTo('shop'); toggleMobileMenu()" class="block w-full text-left px-3 py-2 rounded-lg text-sm font-semibold text-gray-700 hover:bg-eco-50">Eco Shop</button>
+            <button onclick="navigateTo('navratri'); toggleMobileMenu()" class="block w-full text-left px-3 py-2 rounded-lg text-sm font-semibold text-amber-700 bg-amber-50">Festive Navratri Offer</button>
+            <button onclick="navigateTo('calculator'); toggleMobileMenu()" class="block w-full text-left px-3 py-2 rounded-lg text-sm font-semibold text-gray-700 hover:bg-eco-50">Impact Calculator</button>
+            <button onclick="navigateTo('about'); toggleMobileMenu()" class="block w-full text-left px-3 py-2 rounded-lg text-sm font-semibold text-gray-700 hover:bg-eco-50">Our Mission</button>
+        </div>
+    </header>
+
+    <div id="toast-container" class="fixed bottom-6 right-6 z-50 flex flex-col space-y-2 pointer-events-none"></div>
+
+    <!-- MAIN MULTI-PAGE CONTENT CONTAINER -->
+    <main class="flex-grow">
+
+        <!-- ================= PAGE 1: HOME PAGE ================= -->
+        <section id="page-home" class="page-content animate-fade-in">
+            <div class="relative overflow-hidden bg-gradient-to-b from-eco-50/80 via-white to-eco-50/40 py-12 lg:py-20">
+                <!-- Background Decorative Leaves -->
+                <div class="absolute -top-10 -left-10 w-40 h-40 bg-eco-200/40 rounded-full blur-3xl pointer-events-none"></div>
+                <div class="absolute top-1/2 -right-10 w-60 h-60 bg-amber-200/30 rounded-full blur-3xl pointer-events-none"></div>
+
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                        
+                        <!-- Left Hero Column -->
+                        <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                            <div class="inline-flex items-center space-x-2 bg-eco-100 border border-eco-300 text-eco-800 text-xs font-bold px-3.5 py-1.5 rounded-full shadow-sm">
+                                <span class="flex h-2 w-2 rounded-full bg-eco-500 animate-ping"></span>
+                                <span>100% Organic & Biodegradable Products</span>
+                            </div>
+
+                            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-eco-900 tracking-tight leading-tight font-serif">
+                                Sip Sustainably with Pure <span class="text-transparent bg-clip-text bg-gradient-to-r from-eco-600 via-eco-500 to-amber-600">Bamboo Magic</span>
+                            </h1>
+
+                            <p class="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto lg:mx-0 font-normal leading-relaxed">
+                                Replace single-use plastics with hand-crafted natural bamboo bottles, coconut bowls, and organic lifestyle goods. Durable, beautifully insulated, and kind to Mother Earth.
+                            </p>
+
+                            <!-- Call to Actions -->
+                            <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-2">
+                                <button onclick="navigateTo('shop')" class="px-7 py-3.5 bg-eco-600 hover:bg-eco-700 text-white font-bold text-sm rounded-2xl shadow-lg shadow-eco-300 transform hover:-translate-y-0.5 transition duration-200 flex items-center space-x-2">
+                                    <span>Explore Collection</span>
+                                    <i class="fa-solid fa-arrow-right text-xs"></i>
+                                </button>
+                                <button onclick="navigateTo('navratri')" class="px-7 py-3.5 bg-amber-100 hover:bg-amber-200 text-amber-900 font-bold text-sm rounded-2xl border border-amber-300 shadow-sm transition duration-200 flex items-center space-x-2">
+                                    <i class="fa-solid fa-om text-amber-600"></i>
+                                    <span>Navratri Deals (20% OFF)</span>
+                                </button>
+                            </div>
+
+                            <!-- Trust Badges -->
+                            <div class="pt-6 border-t border-eco-100/80 grid grid-cols-3 gap-4 text-center lg:text-left">
+                                <div class="space-y-1">
+                                    <p class="text-2xl font-black text-eco-800">50,000+</p>
+                                    <p class="text-xs text-gray-500 font-medium">Plastics Saved</p>
+                                </div>
+                                <div class="space-y-1">
+                                    <p class="text-2xl font-black text-eco-800">100%</p>
+                                    <p class="text-xs text-gray-500 font-medium">Natural Bamboo</p>
+                                </div>
+                                <div class="space-y-1">
+                                    <p class="text-2xl font-black text-eco-800">4.9 ★</p>
+                                    <p class="text-xs text-gray-500 font-medium">5,000+ Reviews</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right Hero Column: Interactive Floating Bamboo Product Showcase -->
+                        <div class="lg:col-span-5 relative flex justify-center">
+                            <div class="relative w-full max-w-md aspect-square rounded-3xl bg-gradient-to-tr from-eco-200/60 via-amber-100/50 to-eco-100/80 p-8 flex items-center justify-center shadow-xl border border-white">
+                                
+                                <!-- Floating Leaves and Sparks -->
+                                <div class="absolute top-4 left-6 text-eco-500 text-2xl animate-float"><i class="fa-solid fa-leaf"></i></div>
+                                <div class="absolute bottom-8 right-6 text-amber-500 text-xl animate-float-slow"><i class="fa-solid fa-sparkles"></i></div>
+                                <div class="absolute top-1/2 right-4 text-eco-400 text-lg animate-pulse"><i class="fa-solid fa-seedling"></i></div>
+
+                                <!-- Animated SVG Hero Bamboo Flask Illustration -->
+                                <div class="relative z-10 w-full h-full flex flex-col items-center justify-center animate-float">
+                                    <svg class="w-56 h-72 drop-shadow-2xl" viewBox="0 0 200 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <!-- Cap -->
+                                        <rect x="70" y="20" width="60" height="24" rx="6" fill="#78350F" />
+                                        <rect x="75" y="44" width="50" height="10" fill="#D97706" />
+                                        <rect x="85" y="10" width="30" height="12" rx="3" fill="#B45309" />
+                                        <!-- Main Bottle Body -->
+                                        <rect x="55" y="54" width="90" height="200" rx="18" fill="url(#bambooWoodGrad)" stroke="#B45309" stroke-width="2"/>
+                                        <!-- Bamboo Nodes / Joints -->
+                                        <path d="M55 100 Q100 106 145 100" stroke="#78350F" stroke-width="3.5" stroke-linecap="round"/>
+                                        <path d="M55 160 Q100 166 145 160" stroke="#78350F" stroke-width="3.5" stroke-linecap="round"/>
+                                        <path d="M55 220 Q100 226 145 220" stroke="#78350F" stroke-width="3.5" stroke-linecap="round"/>
+                                        <!-- Natural Grain Lines -->
+                                        <line x1="75" y1="65" x2="75" y2="90" stroke="#D97706" stroke-width="1.5" opacity="0.4"/>
+                                        <line x1="120" y1="70" x2="120" y2="92" stroke="#D97706" stroke-width="1.5" opacity="0.4"/>
+                                        <line x1="95" y1="110" x2="95" y2="150" stroke="#D97706" stroke-width="1.5" opacity="0.4"/>
+                                        <line x1="130" y1="170" x2="130" y2="210" stroke="#D97706" stroke-width="1.5" opacity="0.4"/>
+                                        <!-- Eco Shield Badge on Bottle -->
+                                        <circle cx="100" cy="130" r="18" fill="#15803d" opacity="0.9"/>
+                                        <path d="M100 118 L108 124 V133 C108 138 100 142 100 142 C100 142 92 138 92 133 V124 L100 118 Z" fill="#ffffff"/>
+                                        <!-- Temperature Indicator -->
+                                        <rect x="70" y="228" width="60" height="16" rx="8" fill="#1e293b" opacity="0.9"/>
+                                        <text x="100" y="240" fill="#4ade80" font-size="10" font-weight="bold" text-anchor="middle">24 hrs Cold</text>
+
+                                        <defs>
+                                            <linearGradient id="bambooWoodGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                                                <stop offset="0%" stop-color="#FDE68A" />
+                                                <stop offset="30%" stop-color="#FEF3C7" />
+                                                <stop offset="70%" stop-color="#FDE68A" />
+                                                <stop offset="100%" stop-color="#D97706" />
+                                            </linearGradient>
+                                        </defs>
+                                    </svg>
+                                    
+                                    <!-- Dynamic Badge -->
+                                    <div class="absolute -bottom-2 bg-white px-4 py-2 rounded-2xl shadow-lg border border-eco-200 flex items-center space-x-2">
+                                        <i class="fa-solid fa-temperature-arrow-down text-eco-600"></i>
+                                        <span class="text-xs font-bold text-gray-800">Thermos Insulated Bamboo Flask</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                <div class="rounded-3xl festive-gradient p-8 sm:p-10 border border-amber-200 shadow-sm relative overflow-hidden">
+                    <div class="absolute -right-10 -bottom-10 opacity-10 pointer-events-none">
+                        <i class="fa-solid fa-om text-9xl text-amber-900"></i>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center relative z-10">
+                        <div class="md:col-span-2 space-y-3">
+                            <div class="inline-flex items-center space-x-2 bg-amber-500 text-white text-xs font-black px-3 py-1 rounded-full uppercase tracking-wider">
+                                <i class="fa-solid fa-bolt"></i> Navratri Eco Utsav Offer
+                            </div>
+                            <h2 class="text-2xl sm:text-3xl font-extrabold text-amber-950 font-serif">
+                                Celebrate Plastic-Free Garba & Pooja Festivities!
+                            </h2>
+                            <p class="text-sm text-amber-900/80 max-w-xl">
+                                Switch to hand-carved Bamboo Dandiya sticks, Terracotta Clay Diyas, and Organic Herbal Rangoli colors. Enjoy an extra 20% discount with code <span class="bg-amber-200 text-amber-950 px-2 py-0.5 rounded font-mono font-bold">NAVRATRI20</span> at checkout.
+                            </p>
+                        </div>
+                        <div class="text-right flex justify-start md:justify-end">
+                            <button onclick="navigateTo('navratri')" class="px-6 py-3 bg-amber-500 hover:bg-amber-600 text-white font-bold text-sm rounded-2xl shadow-md transition duration-200 flex items-center space-x-2">
+                                <span>Shop Festive Collection</span>
+                                <i class="fa-solid fa-arrow-right text-xs"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                <div class="text-center max-w-2xl mx-auto mb-10">
+                    <h2 class="text-3xl font-extrabold text-eco-900 font-serif">Popular Eco Categories</h2>
+                    <p class="text-sm text-gray-600 mt-2">Every purchase helps reduce plastic pollution and supports rural Indian artisans.</p>
+                </div>
+
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                    <div onclick="filterCategory('bottles')" class="group cursor-pointer bg-white p-6 rounded-3xl border border-eco-100 hover:border-eco-400 hover:shadow-xl transition duration-300 text-center space-y-3">
+                        <div class="w-16 h-16 mx-auto rounded-2xl bg-eco-100 text-eco-700 flex items-center justify-center text-2xl group-hover:bg-eco-600 group-hover:text-white transition duration-300">
+                            <i class="fa-solid fa-bottle-water"></i>
+                        </div>
+                        <h3 class="font-bold text-gray-800 group-hover:text-eco-700">Bamboo Flasks</h3>
+                        <p class="text-xs text-gray-500">Thermos & Infusers</p>
+                    </div>
+
+                    <div onclick="filterCategory('cutlery')" class="group cursor-pointer bg-white p-6 rounded-3xl border border-eco-100 hover:border-eco-400 hover:shadow-xl transition duration-300 text-center space-y-3">
+                        <div class="w-16 h-16 mx-auto rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center text-2xl group-hover:bg-amber-500 group-hover:text-white transition duration-300">
+                            <i class="fa-solid fa-utensils"></i>
+                        </div>
+                        <h3 class="font-bold text-gray-800 group-hover:text-amber-700">Kitchen & Dining</h3>
+                        <p class="text-xs text-gray-500">Coconut Bowls & Cutlery</p>
+                    </div>
+
+                    <div onclick="filterCategory('festive')" class="group cursor-pointer bg-white p-6 rounded-3xl border border-eco-100 hover:border-eco-400 hover:shadow-xl transition duration-300 text-center space-y-3">
+                        <div class="w-16 h-16 mx-auto rounded-2xl bg-orange-100 text-orange-700 flex items-center justify-center text-2xl group-hover:bg-orange-500 group-hover:text-white transition duration-300">
+                            <i class="fa-solid fa-om"></i>
+                        </div>
+                        <h3 class="font-bold text-gray-800 group-hover:text-orange-700">Navratri Specials</h3>
+                        <p class="text-xs text-gray-500">Dandiya & Organic Colors</p>
+                    </div>
+
+                    <div onclick="filterCategory('lifestyle')" class="group cursor-pointer bg-white p-6 rounded-3xl border border-eco-100 hover:border-eco-400 hover:shadow-xl transition duration-300 text-center space-y-3">
+                        <div class="w-16 h-16 mx-auto rounded-2xl bg-emerald-100 text-emerald-700 flex items-center justify-center text-2xl group-hover:bg-emerald-600 group-hover:text-white transition duration-300">
+                            <i class="fa-solid fa-bag-shopping"></i>
+                        </div>
+                        <h3 class="font-bold text-gray-800 group-hover:text-emerald-700">Organic Wear & Bags</h3>
+                        <p class="text-xs text-gray-500">Jute & Organic Cotton</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= PAGE 2: SHOP CATALOG PAGE ================= -->
+        <section id="page-shop" class="page-content hidden animate-fade-in">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+                    <div>
+                        <h1 class="text-3xl font-extrabold text-eco-900 font-serif">Eco-Friendly Product Store</h1>
+                        <p class="text-sm text-gray-600">Zero-waste, toxin-free, handcrafted sustainable alternatives.</p>
+                    </div>
+
+                    <!-- Category Filter Buttons -->
+                    <div class="flex flex-wrap gap-2">
+                        <button onclick="filterCategory('all')" class="cat-filter-btn active-cat px-4 py-2 text-xs font-bold rounded-full bg-eco-600 text-white shadow-sm transition">All Products</button>
+                        <button onclick="filterCategory('bottles')" class="cat-filter-btn px-4 py-2 text-xs font-bold rounded-full bg-white text-gray-700 border border-gray-200 hover:bg-eco-50 transition">Bamboo Bottles</button>
+                        <button onclick="filterCategory('cutlery')" class="cat-filter-btn px-4 py-2 text-xs font-bold rounded-full bg-white text-gray-700 border border-gray-200 hover:bg-eco-50 transition">Kitchen & Dining</button>
+                        <button onclick="filterCategory('festive')" class="cat-filter-btn px-4 py-2 text-xs font-bold rounded-full bg-white text-amber-800 border border-amber-200 hover:bg-amber-50 transition">Navratri Special</button>
+                        <button onclick="filterCategory('lifestyle')" class="cat-filter-btn px-4 py-2 text-xs font-bold rounded-full bg-white text-gray-700 border border-gray-200 hover:bg-eco-50 transition">Bags & Accessories</button>
+                    </div>
+                </div>
+
+                <!-- Products Grid -->
+                <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                    <!-- Products dynamically rendered here via JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= PAGE 3: NAVRATRI SPECIAL ZONE ================= -->
+        <section id="page-navratri" class="page-content hidden animate-fade-in">
+            <div class="festive-gradient border-b border-amber-200 py-12">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4">
+                    <span class="bg-amber-500 text-white text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-widest inline-flex items-center space-x-1">
+                        <i class="fa-solid fa-om"></i> <span>Navratri Eco Mahotsav</span>
+                    </span>
+                    <h1 class="text-4xl sm:text-5xl font-extrabold text-amber-950 font-serif">Festive, Joyful & Earth-Friendly</h1>
+                    <p class="text-base text-amber-900/80 max-w-2xl mx-auto">
+                        Make this Navratri truly auspicious by adopting sustainable celebrations. Enjoy handmade bamboo dandiya sticks, natural clay diyas, and zero-chemical rangoli colors.
+                    </p>
+                    
+                    <div class="inline-block glass-card p-4 rounded-2xl festive-border mt-4">
+                        <p class="text-xs font-bold text-amber-900 uppercase tracking-wide">Navratri Exclusive Coupon Code</p>
+                        <div class="flex items-center space-x-3 mt-1 justify-center">
+                            <span class="text-2xl font-black font-mono text-amber-600 bg-amber-100 px-4 py-1 rounded-xl border border-amber-300">NAVRATRI20</span>
+                            <button onclick="copyCouponCode('NAVRATRI20')" class="bg-amber-500 hover:bg-amber-600 text-white text-xs font-bold px-4 py-2.5 rounded-xl shadow transition">
+                                <i class="fa-regular fa-copy mr-1"></i> Copy Code
+                            </button>
+                        </div>
+                        <p class="text-[11px] text-amber-800 mt-2">Get 20% flat discount on total bill upon applying code in your cart!</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Festive Products Grid -->
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+                <h2 class="text-2xl font-extrabold text-amber-950 font-serif mb-6 flex items-center space-x-2">
+                    <i class="fa-solid fa-sparkles text-amber-500"></i>
+                    <span>Festive Eco Collection</span>
+                </h2>
+                <div id="festive-product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                    <!-- Navratri products rendered dynamically -->
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= PAGE 4: ECO IMPACT CALCULATOR ================= -->
+        <section id="page-calculator" class="page-content hidden animate-fade-in">
+            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                <div class="text-center max-w-2xl mx-auto mb-10">
+                    <span class="bg-eco-100 text-eco-800 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Interactive Tool</span>
+                    <h1 class="text-3xl sm:text-4xl font-extrabold text-eco-900 font-serif mt-2">Personal Eco-Impact Calculator</h1>
+                    <p class="text-sm text-gray-600 mt-2">Calculate how much plastic waste and carbon emission you eliminate by switching to bamboo and sustainable alternatives!</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                    <!-- Calculator Inputs -->
+                    <div class="lg:col-span-7 bg-white p-6 sm:p-8 rounded-3xl border border-eco-200 shadow-sm space-y-6">
+                        <h3 class="text-lg font-bold text-eco-900 border-b border-eco-100 pb-3">Your Usage Habits</h3>
+
+                        <!-- Input 1: Plastic Bottles -->
+                        <div class="space-y-2">
+                            <div class="flex justify-between text-sm font-semibold text-gray-700">
+                                <label for="calc-bottles">Plastic Bottles used per week:</label>
+                                <span id="calc-bottles-val" class="text-eco-600 font-bold">14 bottles</span>
+                            </div>
+                            <input type="range" id="calc-bottles" min="0" max="50" value="14" oninput="calculateEcoImpact()" class="w-full accent-eco-600 h-2 bg-eco-100 rounded-lg cursor-pointer">
+                        </div>
+
+                        <!-- Input 2: Disposable Cutlery -->
+                        <div class="space-y-2">
+                            <div class="flex justify-between text-sm font-semibold text-gray-700">
+                                <label for="calc-cutlery">Single-use Cutlery/Spoons per week:</label>
+                                <span id="calc-cutlery-val" class="text-eco-600 font-bold">10 sets</span>
+                            </div>
+                            <input type="range" id="calc-cutlery" min="0" max="50" value="10" oninput="calculateEcoImpact()" class="w-full accent-eco-600 h-2 bg-eco-100 rounded-lg cursor-pointer">
+                        </div>
+
+                        <!-- Input 3: Plastic Bags -->
+                        <div class="space-y-2">
+                            <div class="flex justify-between text-sm font-semibold text-gray-700">
+                                <label for="calc-bags">Plastic Shopping Bags used per week:</label>
+                                <span id="calc-bags-val" class="text-eco-600 font-bold">8 bags</span>
+                            </div>
+                            <input type="range" id="calc-bags" min="0" max="40" value="8" oninput="calculateEcoImpact()" class="w-full accent-eco-600 h-2 bg-eco-100 rounded-lg cursor-pointer">
+                        </div>
+
+                        <div class="p-4 bg-eco-50 rounded-2xl border border-eco-200 text-xs text-eco-800 space-y-1">
+                            <p class="font-bold"><i class="fa-solid fa-lightbulb text-amber-500 mr-1"></i> Did you know?</p>
+                            <p>A single Bamboo Bottle lasts over 3 years and prevents over 1,500 plastic bottles from entering oceans and landfills!</p>
+                        </div>
+                    </div>
+
+                    <!-- Calculated Impact Output Card -->
+                    <div class="lg:col-span-5 bg-gradient-to-br from-eco-900 to-eco-800 text-white p-6 sm:p-8 rounded-3xl shadow-xl space-y-6">
+                        <div class="flex items-center justify-between border-b border-eco-700/60 pb-4">
+                            <h3 class="text-lg font-bold font-serif text-eco-100">Annual Eco Savings</h3>
+                            <i class="fa-solid fa-earth-americas text-eco-400 text-2xl"></i>
+                        </div>
+
+                        <div class="space-y-4">
+                            <div class="bg-eco-950/50 p-4 rounded-2xl border border-eco-700/50 flex items-center space-x-4">
+                                <div class="w-12 h-12 rounded-xl bg-eco-500/20 text-eco-300 flex items-center justify-center text-xl font-bold">
+                                    <i class="fa-solid fa-trash-can-arrow-up"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-eco-200 font-medium">Plastic Prevented</p>
+                                    <p id="res-plastic-kg" class="text-2xl font-black text-amber-300">18.2 kg / yr</p>
+                                </div>
+                            </div>
+
+                            <div class="bg-eco-950/50 p-4 rounded-2xl border border-eco-700/50 flex items-center space-x-4">
+                                <div class="w-12 h-12 rounded-xl bg-eco-500/20 text-eco-300 flex items-center justify-center text-xl font-bold">
+                                    <i class="fa-solid fa-cloud-arrow-down"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-eco-200 font-medium">Carbon Emissions Saved</p>
+                                    <p id="res-co2-kg" class="text-2xl font-black text-amber-300">54.6 kg CO₂</p>
+                                </div>
+                            </div>
+
+                            <div class="bg-eco-950/50 p-4 rounded-2xl border border-eco-700/50 flex items-center space-x-4">
+                                <div class="w-12 h-12 rounded-xl bg-eco-500/20 text-eco-300 flex items-center justify-center text-xl font-bold">
+                                    <i class="fa-solid fa-tree"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-eco-200 font-medium">Tree Planting Equivalent</p>
+                                    <p id="res-trees" class="text-2xl font-black text-amber-300">2.7 Trees / yr</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button onclick="navigateTo('shop')" class="w-full py-3.5 bg-amber-400 hover:bg-amber-300 text-amber-950 font-extrabold text-sm rounded-2xl transition duration-200 shadow-md flex items-center justify-center space-x-2">
+                            <span>Start Savings Today — Shop Now</span>
+                            <i class="fa-solid fa-arrow-right text-xs"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= PAGE 5: ABOUT US / MISSION PAGE ================= -->
+        <section id="page-about" class="page-content hidden animate-fade-in">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                    <div class="space-y-6">
+                        <span class="bg-eco-100 text-eco-800 text-xs font-bold px-3 py-1 rounded-full uppercase">Our Story</span>
+                        <h1 class="text-3xl sm:text-4xl font-extrabold text-eco-900 font-serif">Crafting a Plastic-Free Future with Bamboo</h1>
+                        <p class="text-gray-600 text-sm leading-relaxed">
+                            EcoVibe was born with a mission to empower local artisans while providing pure, chemical-free alternatives to plastic bottles and homeware. Every piece of bamboo is sustainably harvested from organic plantations in North-East India.
+                        </p>
+                        
+                        <div class="grid grid-cols-2 gap-4 pt-2">
+                            <div class="p-4 bg-eco-50 rounded-2xl border border-eco-200">
+                                <i class="fa-solid fa-handshake-angle text-eco-600 text-xl mb-2"></i>
+                                <h4 class="font-bold text-eco-900 text-sm">Fair Artisan Wages</h4>
+                                <p class="text-xs text-gray-500 mt-1">Directly supporting 250+ rural craft families.</p>
+                            </div>
+                            <div class="p-4 bg-eco-50 rounded-2xl border border-eco-200">
+                                <i class="fa-solid fa-truck-fast text-eco-600 text-xl mb-2"></i>
+                                <h4 class="font-bold text-eco-900 text-sm">Carbon-Neutral Delivery</h4>
+                                <p class="text-xs text-gray-500 mt-1">Eco-friendly plastic-free packaging.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="relative">
+                        <div class="aspect-video sm:aspect-square rounded-3xl bg-gradient-to-tr from-eco-700 to-eco-500 p-8 text-white flex flex-col justify-between shadow-xl relative overflow-hidden">
+                            <div class="absolute -right-8 -top-8 w-48 h-48 bg-white/10 rounded-full blur-2xl pointer-events-none"></div>
+                            <div>
+                                <i class="fa-solid fa-quote-left text-4xl text-eco-300 opacity-60"></i>
+                                <p class="text-lg font-serif italic mt-4 leading-relaxed">
+                                    "We don't need a handful of people doing zero waste perfectly. We need millions of people doing it imperfectly."
+                                </p>
+                            </div>
+                            <div class="pt-6 border-t border-eco-400/40">
+                                <p class="font-bold text-sm">EcoVibe Artisan Collective</p>
+                                <p class="text-xs text-eco-200">Assam & Tripura Bamboo Guilds</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="cart-drawer-overlay" onclick="toggleCartModal(false)" class="fixed inset-0 bg-gray-900/50 backdrop-blur-sm z-50 opacity-0 pointer-events-none transition-opacity duration-300"></div>
+    
+    <div id="cart-drawer" class="fixed top-0 right-0 bottom-0 w-full sm:w-[450px] bg-white z-50 shadow-2xl transform translate-x-full transition-transform duration-300 flex flex-col justify-between">
+        <!-- Cart Drawer Header -->
+        <div class="p-5 border-b border-gray-100 flex items-center justify-between bg-eco-50/50">
+            <div class="flex items-center space-x-2">
+                <i class="fa-solid fa-bag-shopping text-eco-600 text-lg"></i>
+                <h3 class="font-extrabold text-gray-900 text-base">Your Eco Basket</h3>
+                <span id="drawer-cart-count" class="bg-eco-200 text-eco-900 font-bold text-xs px-2 py-0.5 rounded-full">0 items</span>
+            </div>
+            <button onclick="toggleCartModal(false)" class="p-2 text-gray-400 hover:text-gray-600 text-lg rounded-lg">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+
+        <!-- Cart Items List Container -->
+        <div id="cart-items-container" class="flex-grow overflow-y-auto p-5 space-y-4">
+            <!-- Dynamic Cart Items Go Here -->
+        </div>
+
+        <!-- Cart Calculator & Bill Section -->
+        <div class="p-5 border-t border-gray-100 bg-gray-50/70 space-y-3">
+            
+            <!-- Coupon Code Section -->
+            <div class="space-y-1">
+                <label for="cart-coupon-input" class="text-xs font-bold text-gray-600 uppercase tracking-wide flex items-center justify-between">
+                    <span>Apply Discount Coupon</span>
+                    <span class="text-amber-600 text-[10px] font-semibold">Try: NAVRATRI20</span>
+                </label>
+                <div class="flex space-x-2">
+                    <input type="text" id="cart-coupon-input" placeholder="Enter NAVRATRI20" class="flex-grow uppercase text-xs font-mono font-bold px-3 py-2 bg-white border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-eco-500">
+                    <button onclick="applyCoupon()" class="px-4 py-2 bg-eco-800 hover:bg-eco-900 text-white font-bold text-xs rounded-xl transition">Apply</button>
+                </div>
+                <div id="coupon-message" class="text-xs font-semibold hidden"></div>
+            </div>
+
+            <!-- Eco Shipping & Carbon Offset Toggle -->
+            <div class="flex items-center justify-between text-xs py-1 border-t border-b border-gray-200">
+                <label class="flex items-center space-x-2 cursor-pointer text-gray-700">
+                    <input type="checkbox" id="carbon-offset-chk" onchange="updateCartBill()" class="rounded text-eco-600 focus:ring-eco-500 accent-eco-600">
+                    <span>Add $1.00 Carbon Offset tree pledge</span>
+                </label>
+            </div>
+
+            <!-- Bill Breakdown Calculator -->
+            <div class="space-y-1.5 text-xs text-gray-600 pt-1">
+                <div class="flex justify-between">
+                    <span>Subtotal</span>
+                    <span id="bill-subtotal" class="font-bold text-gray-900">$0.00</span>
+                </div>
+                <div id="bill-discount-row" class="flex justify-between text-amber-700 hidden font-medium">
+                    <span>Navratri Discount (20%)</span>
+                    <span id="bill-discount">-$0.00</span>
+                </div>
+                <div class="flex justify-between">
+                    <span>Estimated Tax (5% GST)</span>
+                    <span id="bill-tax">$0.00</span>
+                </div>
+                <div class="flex justify-between">
+                    <span>Eco Shipping</span>
+                    <span id="bill-shipping" class="text-eco-600 font-bold">FREE</span>
+                </div>
+                <div id="carbon-offset-row" class="flex justify-between text-eco-700 hidden">
+                    <span>Tree Carbon Offset</span>
+                    <span>+$1.00</span>
+                </div>
+                <div class="flex justify-between text-sm font-extrabold text-gray-900 pt-2 border-t border-gray-200">
+                    <span>Grand Total</span>
+                    <span id="bill-total" class="text-eco-700 text-base">$0.00</span>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="space-y-2 pt-2">
+                <button onclick="generateAndShowBill()" class="w-full py-3.5 bg-eco-600 hover:bg-eco-700 text-white font-bold text-sm rounded-2xl shadow-lg shadow-eco-200 transition duration-200 flex items-center justify-center space-x-2">
+                    <i class="fa-solid fa-file-invoice-dollar"></i>
+                    <span>Generate Bill & Checkout</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="bill-modal" class="fixed inset-0 bg-gray-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white w-full max-w-lg rounded-3xl shadow-2xl overflow-hidden border border-eco-100 animate-fade-in flex flex-col max-h-[90vh]">
+            
+            <!-- Modal Top Ribbon -->
+            <div class="bg-eco-800 text-white p-5 flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center text-amber-300">
+                        <i class="fa-solid fa-receipt text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-extrabold text-base">EcoVibe Order Summary</h3>
+                        <p class="text-xs text-eco-200" id="bill-order-id">Invoice #EV-83921</p>
+                    </div>
+                </div>
+                <button onclick="closeBillModal()" class="p-1.5 text-eco-200 hover:text-white rounded-lg">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+
+            <!-- Modal Printable Receipt Body -->
+            <div id="printable-invoice" class="p-6 overflow-y-auto space-y-4 text-xs text-gray-700">
+                
+                <div class="flex justify-between items-start border-b border-gray-100 pb-3">
+                    <div>
+                        <p class="font-black text-sm text-eco-900">EcoVibe Retail Pvt Ltd</p>
+                        <p class="text-gray-500">Green Tech Park, Sector 5</p>
+                        <p class="text-gray-500">GSTIN: 24AAACE1234F1Z9</p>
+                    </div>
+                    <div class="text-right">
+                        <p class="font-semibold text-gray-900">Date: <span id="bill-date">Oct 09, 2026</span></p>
+                        <p class="text-eco-600 font-bold bg-eco-50 px-2 py-0.5 rounded border border-eco-200 inline-block mt-1">Status: Ready for Payment</p>
+                    </div>
+                </div>
+
+                <!-- Items Breakdown Table -->
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="border-b border-gray-200 text-gray-500 font-bold uppercase text-[10px]">
+                            <th class="py-2">Item</th>
+                            <th class="py-2 text-center">Qty</th>
+                            <th class="py-2 text-right">Price</th>
+                            <th class="py-2 text-right">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody id="bill-table-body" class="divide-y divide-gray-100">
+                        <!-- Items rendered via JS -->
+                    </tbody>
+                </table>
+
+                <!-- Summary Totals -->
+                <div class="bg-eco-50/60 p-4 rounded-2xl space-y-1.5 border border-eco-100">
+                    <div class="flex justify-between">
+                        <span>Items Subtotal:</span>
+                        <span id="modal-subtotal" class="font-bold">$0.00</span>
+                    </div>
+                    <div id="modal-discount-row" class="flex justify-between text-amber-700 font-bold hidden">
+                        <span>Navratri Special Coupon:</span>
+                        <span id="modal-discount">-$0.00</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span>GST & Eco Tax:</span>
+                        <span id="modal-tax">$0.00</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span>Carbon Offset Pledge:</span>
+                        <span id="modal-carbon">$0.00</span>
+                    </div>
+                    <div class="flex justify-between text-sm font-black text-eco-900 pt-2 border-t border-eco-200">
+                        <span>Final Bill Amount:</span>
+                        <span id="modal-total" class="text-base text-eco-700">$0.00</span>
+                    </div>
+                </div>
+
+                <!-- Payment QR & Note -->
+                <div class="p-4 bg-amber-50/60 rounded-2xl border border-amber-200 flex items-center justify-between">
+                    <div>
+                        <p class="font-bold text-amber-950 text-xs">Instant Eco Checkout</p>
+                        <p class="text-[11px] text-amber-800">Scan QR code with any UPI or Mobile Wallet app.</p>
+                    </div>
+                    <!-- Mock QR Code SVG -->
+                    <div class="w-14 h-14 bg-white p-1 rounded-xl shadow-sm border border-amber-300 flex items-center justify-center">
+                        <i class="fa-solid fa-qrcode text-3xl text-gray-800"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer Modal Buttons -->
+            <div class="p-4 bg-gray-50 border-t border-gray-100 flex items-center space-x-3">
+                <button onclick="window.print()" class="w-1/2 py-2.5 bg-white border border-gray-300 hover:bg-gray-100 text-gray-800 font-bold text-xs rounded-xl transition flex items-center justify-center space-x-1.5">
+                    <i class="fa-solid fa-print"></i>
+                    <span>Print Invoice</span>
+                </button>
+                <button onclick="confirmOrder()" class="w-1/2 py-2.5 bg-eco-600 hover:bg-eco-700 text-white font-bold text-xs rounded-xl transition flex items-center justify-center space-x-1.5">
+                    <i class="fa-solid fa-circle-check"></i>
+                    <span>Place Order Now</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-eco-900 text-white mt-16 border-t border-eco-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="space-y-4">
+                    <div class="flex items-center space-x-2">
+                        <div class="w-8 h-8 rounded-lg bg-eco-500 text-white flex items-center justify-center">
+                            <i class="fa-solid fa-seedling"></i>
+                        </div>
+                        <span class="font-extrabold text-xl font-serif">EcoVibe</span>
+                    </div>
+                    <p class="text-xs text-eco-200 leading-relaxed">
+                        Handcrafted, zero-plastic sustainable products for conscious living. Made with pure organic bamboo & love.
+                    </p>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-sm text-eco-100 mb-3">Quick Navigation</h4>
+                    <ul class="space-y-2 text-xs text-eco-300">
+                        <li><a href="#" onclick="navigateTo('home'); return false;" class="hover:text-amber-300">Home</a></li>
+                        <li><a href="#" onclick="navigateTo('shop'); return false;" class="hover:text-amber-300">Eco Store</a></li>
+                        <li><a href="#" onclick="navigateTo('navratri'); return false;" class="hover:text-amber-300">Navratri Specials</a></li>
+                        <li><a href="#" onclick="navigateTo('calculator'); return false;" class="hover:text-amber-300">Impact Calculator</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-sm text-eco-100 mb-3">Eco Guarantees</h4>
+                    <ul class="space-y-2 text-xs text-eco-300">
+                        <li><i class="fa-solid fa-leaf text-eco-400 mr-1.5"></i> 100% Biodegradable</li>
+                        <li><i class="fa-solid fa-ban-plastic text-eco-400 mr-1.5"></i> Zero Plastic Packaging</li>
+                        <li><i class="fa-solid fa-hand-holding-heart text-eco-400 mr-1.5"></i> Artisan Supported</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-sm text-eco-100 mb-3">Festive Newsletter</h4>
+                    <p class="text-xs text-eco-300 mb-2">Subscribe for eco discounts and festival gift vouchers.</p>
+                    <div class="flex">
+                        <input type="email" placeholder="Your email..." class="w-full text-xs px-3 py-2 bg-eco-950 text-white rounded-l-xl focus:outline-none border border-eco-700">
+                        <button onclick="showToast('Subscribed! Check email for voucher.')" class="bg-amber-500 hover:bg-amber-400 text-amber-950 font-bold px-3 py-2 text-xs rounded-r-xl">Join</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-8 pt-6 border-t border-eco-800 text-center text-xs text-eco-400 flex flex-col sm:flex-row items-center justify-between">
+                <p>&copy; 2026 EcoVibe Sustainable Goods. All Rights Reserved.</p>
+                <p class="mt-2 sm:mt-0"><i class="fa-solid fa-heart text-amber-400"></i> Pure Green & Plastic-Free Living</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Product Database
+        const products = [
+            {
+                id: 1,
+                name: "Thermos Bamboo Flask (750ml)",
+                category: "bottles",
+                price: 24.99,
+                originalPrice: 29.99,
+                rating: 4.9,
+                badge: "Bestseller",
+                image: "https://images.unsplash.com/photo-1602143407151-7111542de6e8?auto=format&fit=crop&w=600&q=80",
+                description: "Double-wall stainless steel interior with natural bamboo casing. Keeps cold 24h / hot 12h."
+            },
+            {
+                id: 2,
+                name: "Organic Bamboo Infuser Bottle",
+                category: "bottles",
+                price: 19.50,
+                originalPrice: 24.00,
+                rating: 4.8,
+                badge: "Eco Choice",
+                image: "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=600&q=80",
+                description: "Includes removable tea strainer. Leakproof bamboo lid with smooth silicone seal."
+            },
+            {
+                id: 3,
+                name: "Handcrafted Bamboo Dandiya Sticks (Pair)",
+                category: "festive",
+                price: 12.99,
+                originalPrice: 16.99,
+                rating: 5.0,
+                badge: "Navratri Special",
+                image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80",
+                description: "Sustainably carved bamboo sticks decorated with organic cotton thread work for Garba nights."
+            },
+            {
+                id: 4,
+                name: "Eco Clay Terracotta Diyas (Set of 6)",
+                category: "festive",
+                price: 9.99,
+                originalPrice: 14.99,
+                rating: 4.9,
+                badge: "Festive Pooja",
+                image: "https://images.unsplash.com/photo-1577083552431-6e5fd01aa342?auto=format&fit=crop&w=600&q=80",
+                description: "Natural hand-molded clay diyas made by traditional potters. 100% biodegradable."
+            },
+            {
+                id: 5,
+                name: "Raw Coconut Shell Bowl Set",
+                category: "cutlery",
+                price: 16.00,
+                originalPrice: 20.00,
+                rating: 4.7,
+                badge: "Artisan Made",
+                image: "https://images.unsplash.com/photo-1543362906-acfc16c67564?auto=format&fit=crop&w=600&q=80",
+                description: "Smooth polished coconut shell bowls perfect for smoothies, salads, and festive snacks."
+            },
+            {
+                id: 6,
+                name: "Reusable Bamboo Cutlery Travel Set",
+                category: "cutlery",
+                price: 11.50,
+                originalPrice: 15.00,
+                rating: 4.8,
+                badge: "Zero Plastic",
+                image: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=600&q=80",
+                description: "Spoon, fork, knife, straw, and coconut brush in a washable jute carry pouch."
+            },
+            {
+                id: 7,
+                name: "Organic Herbal Rangoli Color Pack",
+                category: "festive",
+                price: 14.99,
+                originalPrice: 18.99,
+                rating: 4.9,
+                badge: "100% Chemical Free",
+                image: "https://images.unsplash.com/photo-1506806732259-39c2d0268443?auto=format&fit=crop&w=600&q=80",
+                description: "Made from flower extracts, turmeric, and rice flour. Safe for kids and soil-friendly."
+            },
+            {
+                id: 8,
+                name: "Unbleached Cotton Canvas Shopping Tote",
+                category: "lifestyle",
+                price: 13.20,
+                originalPrice: 17.00,
+                rating: 4.6,
+                badge: "Heavy Duty",
+                image: "https://images.unsplash.com/photo-1597484661643-2f5fef640dd1?auto=format&fit=crop&w=600&q=80",
+                description: "Reinforced stitching, dual bottle pockets inside. Carries up to 15 kg comfortably."
+            }
+        ];
+
+        // State Management
+        let cart = [];
+        let appliedCoupon = null;
+        let couponDiscountRate = 0;
+
+        // On Page Load Initialize
+        window.onload = function() {
+            renderProducts(products, 'product-grid');
+            renderFestiveProducts();
+            calculateEcoImpact();
+            startNavratriTimer();
+        };
+
+        // Navigation Routing System
+        function navigateTo(pageId) {
+            // Hide all pages
+            const pages = document.querySelectorAll('.page-content');
+            pages.forEach(p => p.classList.add('hidden'));
+
+            // Show selected page
+            const targetPage = document.getElementById(`page-${pageId}`);
+            if (targetPage) {
+                targetPage.classList.remove('hidden');
+            }
+
+            // Update Nav Active Styling
+            document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('tab-active'));
+            const activeBtn = document.getElementById(`nav-${pageId}`);
+            if (activeBtn) {
+                activeBtn.classList.add('tab-active');
+            }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Render Product Cards
+        function renderProducts(items, containerId) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+
+            if (items.length === 0) {
+                container.innerHTML = `
+                    <div class="col-span-full text-center py-12 text-gray-500">
+                        <i class="fa-solid fa-basket-shopping text-4xl mb-3 text-eco-300"></i>
+                        <p class="font-bold">No eco products matched your search.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = items.map(product => `
+                <div class="group bg-white rounded-3xl border border-eco-100 hover:border-eco-300 shadow-sm hover:shadow-xl transition duration-300 overflow-hidden flex flex-col justify-between">
+                    <div>
+                        <!-- Product Image Container -->
+                        <div class="relative h-48 sm:h-52 overflow-hidden bg-eco-50">
+                            <img src="${product.image}" alt="${product.name}" 
+                                 onerror="this.src='https://placehold.co/600x400/dcfce7/14532d?text=${encodeURIComponent(product.name)}'" 
+                                 class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                            
+                            <span class="absolute top-3 left-3 bg-white/95 backdrop-blur text-eco-900 font-extrabold text-[10px] px-2.5 py-1 rounded-full shadow border border-eco-200">
+                                ${product.badge}
+                            </span>
+
+                            <button onclick="quickAddToCart(${product.id})" class="absolute bottom-3 right-3 w-10 h-10 rounded-2xl bg-eco-600 hover:bg-eco-700 text-white shadow-md flex items-center justify-center transform translate-y-12 group-hover:translate-y-0 transition duration-300">
+                                <i class="fa-solid fa-plus text-sm"></i>
+                            </button>
+                        </div>
+
+                        <!-- Product Details -->
+                        <div class="p-5 space-y-2">
+                            <div class="flex items-center justify-between text-xs text-amber-600 font-bold">
+                                <span><i class="fa-solid fa-star mr-1"></i> ${product.rating}</span>
+                                <span class="text-eco-700 bg-eco-50 px-2 py-0.5 rounded uppercase text-[9px] font-black">${product.category}</span>
+                            </div>
+
+                            <h3 class="font-bold text-gray-900 text-base group-hover:text-eco-700 transition">${product.name}</h3>
+                            <p class="text-xs text-gray-500 line-clamp-2 leading-relaxed">${product.description}</p>
+                        </div>
+                    </div>
+
+                    <!-- Price and Action -->
+                    <div class="p-5 pt-0 flex items-center justify-between">
+                        <div>
+                            <span class="text-lg font-black text-eco-900">$${product.price.toFixed(2)}</span>
+                            <span class="text-xs text-gray-400 line-through ml-1">$${product.originalPrice.toFixed(2)}</span>
+                        </div>
+                        <button onclick="quickAddToCart(${product.id})" class="px-4 py-2 bg-eco-100 hover:bg-eco-600 hover:text-white text-eco-800 font-bold text-xs rounded-xl transition duration-200">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Render Festive Navratri Products
+        function renderFestiveProducts() {
+            const festiveItems = products.filter(p => p.category === 'festive');
+            renderProducts(festiveItems, 'festive-product-grid');
+        }
+
+        // Filter Products by Category
+        function filterCategory(cat) {
+            const buttons = document.querySelectorAll('.cat-filter-btn');
+            buttons.forEach(btn => {
+                btn.classList.remove('bg-eco-600', 'text-white');
+                btn.classList.add('bg-white', 'text-gray-700');
+            });
+
+            if (cat === 'all') {
+                renderProducts(products, 'product-grid');
+            } else {
+                const filtered = products.filter(p => p.category === cat);
+                renderProducts(filtered, 'product-grid');
+            }
+        }
+
+        // Filter Products by Search Bar
+        function filterProductsBySearch(term) {
+            const query = term.toLowerCase().trim();
+            if (!query) {
+                renderProducts(products, 'product-grid');
+                return;
+            }
+            const matched = products.filter(p => 
+                p.name.toLowerCase().includes(query) || 
+                p.description.toLowerCase().includes(query)
+            );
+            renderProducts(matched, 'product-grid');
+        }
+
+        // Add Product to Cart
+        function quickAddToCart(id) {
+            const prod = products.find(p => p.id === id);
+            if (!prod) return;
+
+            const existingIndex = cart.findIndex(item => item.id === id);
+            if (existingIndex > -1) {
+                cart[existingIndex].qty += 1;
+            } else {
+                cart.push({ ...prod, qty: 1 });
+            }
+
+            updateCartUI();
+            showToast(`Added ${prod.name} to cart!`);
+            
+            // Trigger trigger animation on cart badge
+            const badge = document.getElementById('cart-badge');
+            badge.classList.add('animate-ping');
+            setTimeout(() => badge.classList.remove('animate-ping'), 500);
+        }
+
+        // Update Cart UI & Calculator
+        function updateCartUI() {
+            const cartCount = cart.reduce((sum, item) => sum + item.qty, 0);
+            document.getElementById('cart-badge').innerText = cartCount;
+            document.getElementById('drawer-cart-count').innerText = `${cartCount} items`;
+
+            const container = document.getElementById('cart-items-container');
+            if (cart.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-12 text-gray-400 space-y-2">
+                        <i class="fa-solid fa-cart-flatbed text-4xl text-eco-200"></i>
+                        <p class="font-bold text-gray-600 text-sm">Your basket is currently empty</p>
+                        <p class="text-xs">Add bamboo bottles and festive kits to get started!</p>
+                    </div>
+                `;
+            } else {
+                container.innerHTML = cart.map(item => `
+                    <div class="flex items-center justify-between bg-white p-3 rounded-2xl border border-gray-100 shadow-sm space-x-3">
+                        <img src="${item.image}" alt="${item.name}" class="w-14 h-14 object-cover rounded-xl bg-eco-50">
+                        <div class="flex-grow space-y-0.5">
+                            <h4 class="font-bold text-xs text-gray-900 leading-tight">${item.name}</h4>
+                            <p class="text-xs font-black text-eco-700">$${item.price.toFixed(2)}</p>
+                        </div>
+                        <div class="flex items-center space-x-1 bg-gray-100 rounded-xl p-1">
+                            <button onclick="changeQty(${item.id}, -1)" class="w-6 h-6 flex items-center justify-center text-xs text-gray-600 hover:bg-white rounded-lg">-</button>
+                            <span class="w-6 text-center text-xs font-bold text-gray-800">${item.qty}</span>
+                            <button onclick="changeQty(${item.id}, 1)" class="w-6 h-6 flex items-center justify-center text-xs text-gray-600 hover:bg-white rounded-lg">+</button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            updateCartBill();
+        }
+
+        function changeQty(id, delta) {
+            const idx = cart.findIndex(i => i.id === id);
+            if (idx > -1) {
+                cart[idx].qty += delta;
+                if (cart[idx].qty <= 0) {
+                    cart.splice(idx, 1);
+                }
+            }
+            updateCartUI();
+        }
+
+        // Cart Bill Calculator Logic
+        function updateCartBill() {
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+            const discountAmt = subtotal * couponDiscountRate;
+            const taxAmt = (subtotal - discountAmt) * 0.05; // 5% GST
+            
+            const offsetChecked = document.getElementById('carbon-offset-chk')?.checked || false;
+            const carbonAmt = offsetChecked ? 1.00 : 0.00;
+
+            const grandTotal = Math.max(0, subtotal - discountAmt + taxAmt + carbonAmt);
+
+            document.getElementById('bill-subtotal').innerText = `$${subtotal.toFixed(2)}`;
+            
+            if (couponDiscountRate > 0) {
+                document.getElementById('bill-discount-row').classList.remove('hidden');
+                document.getElementById('bill-discount').innerText = `-$${discountAmt.toFixed(2)}`;
+            } else {
+                document.getElementById('bill-discount-row').classList.add('hidden');
+            }
+
+            document.getElementById('bill-tax').innerText = `$${taxAmt.toFixed(2)}`;
+            
+            if (offsetChecked) {
+                document.getElementById('carbon-offset-row').classList.remove('hidden');
+            } else {
+                document.getElementById('carbon-offset-row').classList.add('hidden');
+            }
+
+            document.getElementById('bill-total').innerText = `$${grandTotal.toFixed(2)}`;
+        }
+
+        // Apply Coupon Code Function
+        function applyCoupon() {
+            const input = document.getElementById('cart-coupon-input').value.trim().toUpperCase();
+            const msg = document.getElementById('coupon-message');
+
+            if (input === 'NAVRATRI20') {
+                couponDiscountRate = 0.20; // 20% discount
+                appliedCoupon = 'NAVRATRI20';
+                msg.className = "text-xs font-bold text-eco-600 mt-1 flex items-center";
+                msg.innerHTML = `<i class="fa-solid fa-circle-check mr-1"></i> Coupon NAVRATRI20 applied! Saved 20%`;
+                msg.classList.remove('hidden');
+                
+                // Trigger celebratory confetti burst!
+                confetti({
+                    particleCount: 60,
+                    spread: 60,
+                    origin: { y: 0.8 }
+                });
+            } else {
+                msg.className = "text-xs font-bold text-rose-500 mt-1 flex items-center";
+                msg.innerHTML = `<i class="fa-solid fa-circle-exclamation mr-1"></i> Invalid Coupon Code. Try NAVRATRI20`;
+                msg.classList.remove('hidden');
+            }
+            updateCartBill();
+        }
+
+        function copyCouponCode(code) {
+            // Document execCommand fallback for clipboard copy
+            const tempInput = document.createElement("input");
+            tempInput.value = code;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand("copy");
+            document.body.removeChild(tempInput);
+
+            showToast(`Coupon code ${code} copied to clipboard!`);
+            
+            const cartInput = document.getElementById('cart-coupon-input');
+            if (cartInput) cartInput.value = code;
+        }
+
+        // Open/Close Cart Drawer Modal
+        function toggleCartModal(show) {
+            const overlay = document.getElementById('cart-drawer-overlay');
+            const drawer = document.getElementById('cart-drawer');
+            
+            if (show) {
+                overlay.classList.remove('opacity-0', 'pointer-events-none');
+                drawer.classList.remove('translate-x-full');
+            } else {
+                overlay.classList.add('opacity-0', 'pointer-events-none');
+                drawer.classList.add('translate-x-full');
+            }
+        }
+
+        // Generate Bill Receipt Modal
+        function generateAndShowBill() {
+            if (cart.length === 0) {
+                showToast("Your cart is empty! Add products to generate a bill.");
+                return;
+            }
+
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+            const discountAmt = subtotal * couponDiscountRate;
+            const taxAmt = (subtotal - discountAmt) * 0.05;
+            const offsetChecked = document.getElementById('carbon-offset-chk')?.checked || false;
+            const carbonAmt = offsetChecked ? 1.00 : 0.00;
+            const grandTotal = Math.max(0, subtotal - discountAmt + taxAmt + carbonAmt);
+
+            // Populate Bill Table
+            const tableBody = document.getElementById('bill-table-body');
+            tableBody.innerHTML = cart.map(item => `
+                <tr class="text-xs">
+                    <td class="py-2.5 font-semibold text-gray-800">${item.name}</td>
+                    <td class="py-2.5 text-center text-gray-600">${item.qty}</td>
+                    <td class="py-2.5 text-right text-gray-600">$${item.price.toFixed(2)}</td>
+                    <td class="py-2.5 text-right font-bold text-gray-900">$${(item.price * item.qty).toFixed(2)}</td>
+                </tr>
+            `).join('');
+
+            document.getElementById('modal-subtotal').innerText = `$${subtotal.toFixed(2)}`;
+            
+            if (couponDiscountRate > 0) {
+                document.getElementById('modal-discount-row').classList.remove('hidden');
+                document.getElementById('modal-discount').innerText = `-$${discountAmt.toFixed(2)}`;
+            } else {
+                document.getElementById('modal-discount-row').classList.add('hidden');
+            }
+
+            document.getElementById('modal-tax').innerText = `$${taxAmt.toFixed(2)}`;
+            document.getElementById('modal-carbon').innerText = offsetChecked ? '$1.00' : '$0.00';
+            document.getElementById('modal-total').innerText = `$${grandTotal.toFixed(2)}`;
+
+            document.getElementById('bill-order-id').innerText = `Invoice #EV-${Math.floor(10000 + Math.random() * 90000)}`;
+            document.getElementById('bill-date').innerText = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+
+            toggleCartModal(false);
+            document.getElementById('bill-modal').classList.remove('hidden');
+        }
+
+        function closeBillModal() {
+            document.getElementById('bill-modal').classList.add('hidden');
+        }
+
+        function confirmOrder() {
+            closeBillModal();
+            cart = [];
+            updateCartUI();
+            
+            // Celebration Confetti
+            confetti({
+                particleCount: 120,
+                spread: 100,
+                origin: { y: 0.5 }
+            });
+
+            showToast("🎉 Order Placed Successfully! Thank you for choosing green.");
+        }
+
+        // Eco Impact Personal Calculator Logic
+        function calculateEcoImpact() {
+            const bottles = parseInt(document.getElementById('calc-bottles').value);
+            const cutlery = parseInt(document.getElementById('calc-cutlery').value);
+            const bags = parseInt(document.getElementById('calc-bags').value);
+
+            document.getElementById('calc-bottles-val').innerText = `${bottles} bottles`;
+            document.getElementById('calc-cutlery-val').innerText = `${cutlery} sets`;
+            document.getElementById('calc-bags-val').innerText = `${bags} bags`;
+
+            // Formulas for annual plastic prevented
+            const totalItemsPerYr = (bottles * 52) + (cutlery * 52) + (bags * 52);
+            const plasticKg = (totalItemsPerYr * 0.015).toFixed(1); // avg 15g per item
+            const co2Kg = (plasticKg * 3.0).toFixed(1); // 3kg CO2 per kg plastic
+            const trees = (co2Kg / 20.0).toFixed(1); // 1 tree absorbs ~20kg CO2/yr
+
+            document.getElementById('res-plastic-kg').innerText = `${plasticKg} kg / yr`;
+            document.getElementById('res-co2-kg').innerText = `${co2Kg} kg CO₂`;
+            document.getElementById('res-trees').innerText = `${trees} Trees / yr`;
+        }
+
+        // Navratri Timer Countdown Simulation
+        function startNavratriTimer() {
+            let totalSeconds = 4 * 86400 + 18 * 3600 + 32 * 60 + 10;
+            
+            setInterval(() => {
+                if (totalSeconds <= 0) return;
+                totalSeconds--;
+
+                const days = Math.floor(totalSeconds / 86400);
+                const hours = Math.floor((totalSeconds % 86400) / 3600);
+                const mins = Math.floor((totalSeconds % 3600) / 60);
+                const secs = totalSeconds % 60;
+
+                const timerEl = document.getElementById('navratri-timer');
+                if (timerEl) {
+                    timerEl.innerText = `${String(days).padStart(2,'0')}d : ${String(hours).padStart(2,'0')}h : ${String(mins).padStart(2,'0')}m : ${String(secs).padStart(2,'0')}s`;
+                }
+            }, 1000);
+        }
+
+        // Toggle Mobile Menu
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Custom Toast System
+        function showToast(message) {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = "bg-gray-900 text-white text-xs font-semibold px-4 py-3 rounded-2xl shadow-2xl flex items-center space-x-2 border border-eco-500/30 transform transition duration-300 pointer-events-auto animate-bounce-subtle";
+            toast.innerHTML = `
+                <i class="fa-solid fa-leaf text-eco-400"></i>
+                <span>${message}</span>
+            `;
+            container.appendChild(toast);
+
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
